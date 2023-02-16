@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CiviliZation - Version 3</title>
+    <style>
+        body{
+            background-color: lightgreen;
+            color:blue;
+            text-align: center;
+        }
+        h1{
+            font-size: 5em;
+        }#b{
+            color:black;
+        }.d{
+            color:grey;
+            background-color: aqua;
+            padding: 10px;
+            width: 40%;
+            float:left;
+            margin:2%;
+            text-align: center;
+        }h2{
+            font-size: 2em;
+            color:blue;
+        }button{
+            margin:5px;
+            color:rgb(90, 163, 90);
+            background-color: rgb(65, 65, 171);
+        }select{
+            margin:5px;
+            color:rgb(100, 205, 100);
+            background-color: rgb(91, 91, 201);
+        }
+    </style>
+</head>
+<body>
+    <h1>Civili<span id="b">Z</span>ation</h1>
+    <div class="d">
+        <h2>Resources</h2>
+        Wood:<span id="w">50</span><br>
+        Stone:<span id="s">50</span><br>
+        Coal:<span id="c">0</span><br>
+        Iron Ore:<span id="io">0</span><br>
+        Iron Ingots:<span id="ii">0</span><br>
+        Gold Ore:<span id="go">0</span><br>
+        Gold Ingots:<span id="gi">0</span><br>
+        Machine Parts:<span id="mp">0</span><br>
+        Coins:<span id="co">0</span><br>
+        Water:<span id="wa">3</span><br>
+        Fuel:<span id="fu">0</span><br>
+        Oil:<span id="o">0</span><br>
+        Steel:<span id="st">0</span><br>
+        Food:<span id="foo">2</span><br>
+    </div>
+    <div class="d">
+        <h2>Buildings</h2>
+        Logger:<span id="l">0</span><button onclick="build('l')">Build for 12 wood</button><br>
+        Quarry:<span id="q">0</span><button onclick="build('q')">Build for 8 wood and 4 stone</button><br>
+        Furnace:<span id="f">0</span><button onclick="build('f')">Build for 12 stone</button><br>
+        Machine Parts Factory:<span id="mpf">0</span><button onclick="build('mpf')">Build for 20 iron ingots and 5 gold ingots</button><br>
+        Gold Cutter:<span id="gc">0</span><button onclick="build('gc')">Build for 25 gold ingots and 15 machine parts</button><br>
+        Aquafire pumper:<span id="ap">3</span><button onclick="build('ap')">Build for 3 machine parts and 15 iron ingots</button><br>
+        Fuel refinery:<span id="fr">0</span><button onclick="build('fr')">Build for 5 machine parts and 12 steel</button><br>
+        Oil Miner:<span id="om">0</span><button onclick="build('om')">Build for 7 machine parts and 20 steel</button><br>
+        Oil Export Truck:<span id="oet">0</span><button onclick="build('oet')">Build for 10 machine parts and 20 iron ingots</button><br>
+        Forge:<span id="fo">0</span><button onclick="build('fo')">Build for 30 iron ingots</button><br>
+        Farm:<span id="fa">1</span><button onclick="build('fa')">Build for 30 wood</button><br>
+        Nursery:<span id="n">0</span><button onclick="build('n')">Build for 50 stone</button><br>
+        House:<span id="h">1</span><button onclick="build('h')">Build for 50 wood and 2 steel</button><br>
+        Employer Office:<span id="e">0</span><button onclick="build('e')">Build for 15 steel</button><br>
+        Auto Assembler:<span id="aa">0</span><button onclick="build('aa')">Build for 100 steel and 25 machine parts</button><br>
+    </div>
+    <div class="d">
+        <h2>People</h2>
+        People:<span id="p">2</span><br>
+        Workers:<span id="wo">0</span><br>
+    </div>
+    <div class="d">
+        <h2>Controls</h2>
+        Assemble: <select id="aac"><option value="x">None</option><option value="q">Quarry</option><option value="f">Furnace</option><option value="ap">Aquafire Pumper</option><option value="fa">Farm</option><option value="h">House</option></select><br>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    win = false
+    b=5
+    function build(i){
+        switch(i){
+            case "l":
+                if(Number($("#w").text())>=12){
+                    $("#w").text(Number($("#w").text())-12)
+                    $("#l").text(Number($("#l").text())+1)
+                    b++;
+                }
+                break;
+            case "q":
+                if(Number($("#w").text())>=8 && Number($("#s").text())>=4){
+                    $("#w").text(Number($("#w").text())-8)
+                    $("#s").text(Number($("#s").text())-4)
+                    $("#q").text(Number($("#q").text())+1)
+                    b++;
+                }
+                break;
+            case "f":
+                if(Number($("#s").text())>=12){
+                    $("#s").text(Number($("#s").text())-12)
+                    $("#f").text(Number($("#f").text())+1)
+                    b++;
+                }
+                break;
+            case "mpf":
+                if(Number($("#ii").text())>=20 && Number($("#gi").text())>=5){
+                    $("#ii").text(Number($("#ii").text())-20)
+                    $("#gi").text(Number($("#gi").text())-5)
+                    $("#mpf").text(Number($("#mpf").text())+1)
+                    b++;
+                }
+                break;
+            case "gc":
+                if(Number($("#gi").text())>=25 && Number($("#mp").text())>=15){
+                    $("#mp").text(Number($("#mp").text())-15)
+                    $("#gi").text(Number($("#gi").text())-25)
+                    $("#gc").text(Number($("#gc").text())+1)
+                    b++;
+                }
+                break;
+            case "ap":
+                if(Number($("#ii").text())>=15 && Number($("#mp").text())>=3){
+                    $("#mp").text(Number($("#mp").text())-3)
+                    $("#ii").text(Number($("#ii").text())-15)
+                    $("#ap").text(Number($("#ap").text())+1)
+                    b++;
+                }
+                break;
+            case "fr":
+                if(Number($("#st").text())>=12 && Number($("#mp").text())>=5){
+                    $("#mp").text(Number($("#mp").text())-5)
+                    $("#st").text(Number($("#st").text())-12)
+                    $("#fr").text(Number($("#fr").text())+1)
+                    b++;
+                }
+                break;
+            case "om":
+                if(Number($("#st").text())>=20 && Number($("#mp").text())>=7){
+                    $("#mp").text(Number($("#mp").text())-7)
+                    $("#st").text(Number($("#st").text())-20)
+                    $("#om").text(Number($("#om").text())+1)
+                    b++;
+                }
+                break;
+            case "oet":
+                if(Number($("#ii").text())>=20 && Number($("#mp").text())>=10){
+                    $("#mp").text(Number($("#mp").text())-10)
+                    $("#ii").text(Number($("#ii").text())-20)
+                    $("#oet").text(Number($("#oet").text())+1)
+                    b++;
+                }
+                break;
+            case "fo":
+                if(Number($("#ii").text())>=30){
+                    $("#ii").text(Number($("#ii").text())-30)
+                    $("#fo").text(Number($("#fo").text())+1)
+                    b++;
+                }
+                break;
+            case "fa":
+                if(Number($("#w").text())>=30){
+                    $("#w").text(Number($("#w").text())-30)
+                    $("#fa").text(Number($("#fa").text())+1)
+                    b++;
+                }
+                break;
+            case "n":
+                if(Number($("#s").text())>=50){
+                    $("#s").text(Number($("#s").text())-50)
+                    $("#n").text(Number($("#n").text())+1)
+                    b++;
+                }
+                break;
+            case "h":
+                if(Number($("#st").text())>=2 && Number($("#w").text())>=50){
+                    $("#w").text(Number($("#w").text())-50)
+                    $("#st").text(Number($("#st").text())-2)
+                    $("#h").text(Number($("#h").text())+1)
+                    b++;
+                }
+                break;
+            case "e":
+                if(Number($("#st").text())>=15){
+                    $("#st").text(Number($("#st").text())-15)
+                    $("#e").text(Number($("#e").text())+1)
+                    b++;
+                }
+                break;
+            case "aa":
+                if(Number($("#st").text())>=100 && Number($("#mp").text())>=25){
+                    $("#mp").text(Number($("#mp").text())-25)
+                    $("#st").text(Number($("#st").text())-100)
+                    $("#aa").text(Number($("#aa").text())+1)
+                    b++;
+                }
+                break;
+        }
+    }
+    var t=1000*b/(Number($("#wo").text())+1)
+    if(t>30000){
+        t=30000
+    }
+    function y(){
+    console.log(5000/(Math.floor(Number($("#wo").text())/4)+1))
+    setTimeout(function(){
+        d=0
+        for(var i=0;i<Number($("#e").text());i++){
+            if(Number($("#p").text())-Number($("#wo").text())>0 && Number($("#co").text())>4){
+                $("#wo").text(Number($("#wo").text())+1)
+                $("#co").text(Number($("#co").text())-5)
+            }
+        }
+        for(var i=0;i<Number($("#p").text());i++){
+            if(Number($("#foo").text())>0 && Number($("#wa").text())>0){
+                $("#foo").text(Number($("#foo").text())-1)
+                $("#wa").text(Number($("#wa").text())-1)
+            }else{
+                d++;
+            }
+        }
+        for(var i=0;i<Number($("#n").text());i++){
+            if(Number($("#wa").text())>9 && Number($("#foo").text())>9 && Number($("#p").text())<Number($("#h").text())*4){
+                $("#foo").text(Number($("#foo").text())-1)
+                $("#wa").text(Number($("#wa").text())-1)
+                $("#p").text(Number($("#p").text())+1)
+            }else{
+                break;
+            }
+        }
+        if(d>Number($("#p").text())-Number($("#wo").text())){
+            $("#wo").text(Number($("#wo").text())-(d-(Number($("#p").text())-Number($("#wo").text()))))
+        }
+        $("#p").text(Number($("#p").text())-d)
+        for(var i=0;i<Number($("#mpf").text());i++){
+            if(Number($("#ii").text())>2){
+                $("#ii").text(Number($("#ii").text())-3)
+                $("#mp").text(Number($("#mp").text())+1)
+            }else{
+                break;
+            }
+        }
+        for(var i=0;i<Number($("#fa").text());i++){
+            if(Number($("#wa").text())>0){
+                $("#wa").text(Number($("#wa").text())-1)
+                $("#foo").text(Number($("#foo").text())+3)
+            }else{
+                break;
+            }
+        }
+        for(var i=0;i<Number($("#fr").text());i++){
+            if(Number($("#wa").text())>0){
+                $("#wa").text(Number($("#wa").text())-1)
+                $("#fu").text(Number($("#fu").text())+1)
+            }else{
+                break;
+            }
+        }
+        for(var i=0;i<Number($("#gc").text());i++){
+            if(Number($("#gi").text())>2){
+                $("#gi").text(Number($("#gi").text())-3)
+                $("#co").text(Number($("#co").text())+15)
+            }else{
+                break;
+            }
+        }
+        for(var i=0;i<Number($("#oet").text());i++){
+            if(Number($("#fu").text())>1 && Number($("#o").text())>2){
+                $("#o").text(Number($("#o").text())-3)
+                $("#fu").text(Number($("#fu").text())-2)
+                $("#co").text(Number($("#co").text())+20)
+            }else{
+                break;
+            }
+        }
+        for(var i=0;i<Number($("#fo").text());i++){
+            if(Number($("#ii").text())>2 && Number($("#gi").text())>0){
+                $("#ii").text(Number($("#ii").text())-3)
+                $("#gi").text(Number($("#gi").text())-1)
+                $("#st").text(Number($("#st").text())+4)
+            }else{
+                break;
+            }
+        }
+        for(var i=0;i<Number($("#f").text());i++){
+            x=0
+            if(Number($("#io").text())>2 && Number($("#c").text())>1){
+                $("#io").text(Number($("#io").text())-3)
+                $("#c").text(Number($("#c").text())-2)
+                $("#ii").text(Number($("#ii").text())+3)
+            }else{
+                x++;
+            }
+            if(Number($("#go").text())>2 && Number($("#c").text())>1){
+                $("#go").text(Number($("#go").text())-3)
+                $("#c").text(Number($("#c").text())-2)
+                $("#gi").text(Number($("#gi").text())+3)
+            }else{
+                x++;
+            }
+            if(x==2){
+                break;
+            }
+            
+        }
+        for(var i=0;i<Number($("#aa").text());i++){
+            if(Number($("#c").text())>30){
+                w=Number($("#"+$("#aac").val()).text())
+                build($("#aac").val())
+                if(w==Number($("#"+$("#aac").val()).text())){
+                    break;
+                }else{
+                    $("#c").text(Number($("#c").text())-30)
+                }
+                console.log(w)
+            }else{
+                break;
+            }
+        }
+        $("#w").text(Number($("#w").text())+Number($("#l").text()))
+        $("#s").text(Number($("#s").text())+Number($("#q").text()))
+        $("#wa").text(Number($("#wa").text())+Number($("#ap").text()))
+        $("#o").text(Number($("#o").text())+Number($("#om").text()))
+        $("#c").text(Number($("#c").text())+Math.floor(Number($("#q").text())*Math.random()*1.3))
+        $("#io").text(Number($("#io").text())+Math.floor(Number($("#q").text())*Math.random()*0.9))
+        $("#go").text(Number($("#go").text())+Math.floor(Number($("#q").text())*Math.random()*0.6))
+        if(Number($("#co").text())>=100000 && win==false){
+            alert("You have won CiviliZation - Version 3")
+            win=true
+        }
+        //console.log(t)
+        console.log(5000/(Math.floor(Number($("#wo").text())/4)+1))
+        
+        y();
+    }, 5000/((Number($("#wo").text())/4)+1))
+}   
+y()
+</script>
+</html>
